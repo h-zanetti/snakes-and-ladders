@@ -1,16 +1,16 @@
 import sys
 import settings
-import tricky_ladders
-import fair_game1
-import fair_game2
+from improved_games import tricky_ladders
+from improved_games import fair_game1
+from improved_games import fair_game2
 
 def main():
     try:
         games = int(sys.argv[1])
         if len(sys.argv) == 2:
-            print(f"Analysing {games} games Snakes and Ladders\n")
+            print(f"Analysing {games} games of Snakes and Ladders\n")
             # Iterate over games
-            for game in range(0, games):
+            for game in range(games):
                 # Position players in the starting point
                 positions = [1, 1]
                 # Append game data for statistical analysis
@@ -18,7 +18,7 @@ def main():
                 settings.SNAKES_LANDED.append(0)
                 # Sart game
                 while settings.BOARD[-1] not in positions:
-                    for player in range(0, len(positions)):
+                    for player in range(len(positions)):
                         # Roll the dice
                         positions[player] += settings.roll_dice()
                         settings.ROLLS[game] += 1
@@ -58,10 +58,9 @@ def main():
 
     except Exception as e:
         print(f"{e}\n")
-        print("To successfully run this application you must provide the number of games you want to simulate")
-        print("In order to simulate the normal game, just provide the number of matches you want to simulate\n")
-        print("You can also change the rules by typing 'tricky-ladders', 'fair-game1' or 'fair-game2'\n")
-        print("Tricky Ladders - when landed in a ladder, players have a 50% change to take it")
+        print("To successfully run this application you must provide the number of games you want to simulate. To simulate the normal game, don't provide any other argument.\n")
+        print("You can also change the rules by typing 'tricky-ladders', 'fair-game1' or 'fair-game2' as a thrid argument.\n")
+        print("Tricky Ladders - when landed in a ladder, players have a 50% chance to take it")
         print("Fair Game 1 - Selects a starting position for player 2 that makes the game more fair")
         print("Fair Game 2 - To make the game more fair, gives immunity for player 2 in the first snake landed")
 
